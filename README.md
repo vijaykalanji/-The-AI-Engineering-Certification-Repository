@@ -3,6 +3,6 @@
      height="auto"/>
 </p>
 
-Welcome to [The AI Engineering Bootcamp](https://maven.com/aimakerspace/ai-eng-bootcamp) v1.0. 
+Welcome to The AI Engineering Certification v1.0. 
 
 We’re putting the finishing touches on curriculum, projects, and resources to make sure this is a top-tier, hands-on experience for AI engineers. Check back soon more content will be released shortly 👀✨
