@@ -42,8 +42,3 @@ While we use a simplified workflow for this course (working directly on `main`),
     - In industry: e.g., `feature/login-page` or `release/1.2.0`
 
 For this course, we keep things simple by working directly on `main`. As you progress in your career, you'll learn when and how to use these more advanced workflows.
-
-### Thinking Questions
-
-- What is one lesson you've learned from this?
-- What is one [lesson that you have not yet learned](https://www.loom.com/share/b34e4bd657f74892ac9a01f774113b4d)?

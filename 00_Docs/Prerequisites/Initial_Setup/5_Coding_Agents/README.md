@@ -13,8 +13,5 @@ We can get a better understanding of system-level instructions and how they work
 Rather, ask yourself “If the CTO came to my desk and asked me to explain a piece of code that I have written, could I?”
 
 If the answer is always yes, your job is much more likely to be safe in the age of automation.
-> 
 
-### Thinking Questions
 
-- What is one [lesson that you have not yet learned](https://www.loom.com/share/b34e4bd657f74892ac9a01f774113b4d) about coding agents?

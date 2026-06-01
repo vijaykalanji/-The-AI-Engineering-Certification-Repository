@@ -19,21 +19,11 @@ As ***developers of LLM applications*** like ChatGPT, we “talk” to LLMs usin
 The input list of text messages must each contain a role. There are three types of roles:
 
 1. `System`, also sometimes called `Developer`
-    
-    **System-level instructions are always prioritized ahead of all other messages**.
-    
+  **System-level instructions are always prioritized ahead of all other messages**.
     This is the key point. This is why [Rules](https://cursor.com/docs/context/rules) like Gitflow best practices given to coding agents are effective in keeping our application development on track.
-    
 2. `User`, also sometimes called `Human`: user int
-    
-    User messages represent exactly what do as *users of LLM applications* when providing inputs. Effectively, we can act as a user.
-    
-3. `Assistant`, also sometimes called `AI` 
-    
-    Assistant, or AI messages, are responses directly from the LLM. Similarly, we can also act as the AI and provide preferred responses to given user inputs. We might call this one-shot or few-shot prompting. 
-    
+  User messages represent exactly what do as *users of LLM applications* when providing inputs. Effectively, we can act as a user.
+3. `Assistant`, also sometimes called `AI`
+  Assistant, or AI messages, are responses directly from the LLM. Similarly, we can also act as the AI and provide preferred responses to given user inputs. We might call this one-shot or few-shot prompting.
 
-### **Thinking Questions**
 
-- What is one lesson you've learned from this?
-- What is one [lesson that you have not yet learned](https://www.loom.com/share/b34e4bd657f74892ac9a01f774113b4d)?

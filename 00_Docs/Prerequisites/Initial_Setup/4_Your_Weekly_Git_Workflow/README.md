@@ -77,8 +77,6 @@ git commit -m "Completed lesson X assignment" # Commit changes to git log with a
 git push origin main # Push changes to our public remote so we can submit!
 ```
 
-### Thinking Questions
+### Thinking Question
 
 - Can you look at the diagram above with confidence now?
-- What are three lessons you've learned from this?
-- What is one [lesson that you have not yet learned](https://www.loom.com/share/b34e4bd657f74892ac9a01f774113b4d)?

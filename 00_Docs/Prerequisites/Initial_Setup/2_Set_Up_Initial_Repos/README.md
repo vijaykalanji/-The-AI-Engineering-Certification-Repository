@@ -109,8 +109,3 @@ git push origin main
 
 > During steps 5️⃣ and 6️⃣, notice the use of `main`.`main` is simply the name given to the [default branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches#about-the-default-branch) in a repo.
 > 
-
-### Thinking Questions
-
-- What are three lessons you've learned from this?
-- What is one [lesson that you have not yet learned](https://www.loom.com/share/b34e4bd657f74892ac9a01f774113b4d)?

@@ -17,7 +17,7 @@ Quicklinks are to help you **easily navigate individual session information** fo
 7. [Testing Scripts](../00_Docs/Prerequisites/Initial_Setup/scripts)
 
 ## Onramp Sessions
-A 4-week live session series designed to help prepare for the AI Engineering Certification Program.
+A 4-week live session series designed to help complete the [AI Engineer Challenge](https://aimakerspace.io/the-ai-engineer-certification/aie-challenge/).
 | 📰 Session Topic | ⏺️ Recording  | 🖼️ Slides     | 👨‍💻 Repo     |
 |:-----------------|:-------------|:--------------|:--------------|
 | AI Assisted Development | [Recording!](https://us02web.zoom.us/rec/share/ztpkCP9S-eTyVe7CCFLpF2CM3_PWu-P81DBGmcZeYAW7DtSK9VL1elHIoDjdm_oW.RC-nq31aDuoYziOV) (f1#j7Nr^) | [Slides](https://www.canva.com/design/DAG6SNRlYoI/bpELIN03JVB1xNkd9yo8lA/edit?utm_content=DAG6SNRlYoI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) | [Repo](../00_Docs/Prerequisites/The_AI_Engineer_Onramp_Cohort_2/Session_01_AI_Assisted_Development) |
