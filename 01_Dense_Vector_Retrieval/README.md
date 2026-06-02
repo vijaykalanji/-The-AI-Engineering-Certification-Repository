@@ -7,9 +7,9 @@
 
 ### [Quicklinks]()
 
-| 📰 Session Sheet | ⏺️ Recording | 🖼️ Slides | 👨‍💻 Repo | 📝 Homework | 📁 Feedback |
-|:-----------------|:-------------|:----------|:----------|:------------|:------------|
-| [Dense Vector Retrieval](../00_Docs/Session_Sheets/01_Dense_Vector_Retrieval.md) | | | You are here! | | |
+| 📰 Session Sheet                                                                 | ⏺️ Recording | 🖼️ Slides | 👨‍💻 Repo       | 📝 Homework | 📁 Feedback |
+| :------------------------------------------------------------------------------- | :----------- | :-------- | :------------ | :---------- | :---------- |
+| [Dense Vector Retrieval](../00_Docs/Modules/01_Dense_Vector_Retrieval/README.md) |              |           | You are here! |             |             |
 
 ## 🏗️ How AIM Does Assignments
 
@@ -129,13 +129,13 @@ Document what changed and whether retrieval improved.
 
 ##### Settings Changed:
 
-- 
+-
 
 ##### Results:
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ---
 
