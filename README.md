@@ -6,7 +6,7 @@
   />
 </div>
 
-## The AI Engineering Certification — v1.0
+## The AI Engineering Certification — v1.0 (#AIEC1)
 
 Welcome to [The AI Engineering Certification](https://maven.com/aimakerspace/ai-engineer-certification) v1.0.
 
@@ -30,7 +30,7 @@ Welcome to [The AI Engineering Certification](https://maven.com/aimakerspace/ai-
 To prepare for Session 1, be sure that you have the following things completed:
 
 1. 🧑‍💻 Complete [The AI Engineer Challenge](https://aimakerspace.io/aie-challenge)
-2. 🌡️ Fill out your [starting self-assessment](hhttps://forms.gle/m3Ex6W66jbXUKVjk9) (we won't know where to send your merch without filling this out)!
+2. 🌡️ Fill out your [starting self-assessment](https://forms.gle/m3Ex6W66jbXUKVjk9) (we won't know where to send your merch without filling this out)!
 3. 🛹 Complete your [Onboarding Call](https://calendly.com/mark-aimakerspace/the-ai-engineer-certification-onboarding-cohort-1?month=2026-05) with our Student Success Manager, [Coach Mark](https://www.linkedin.com/in/mark-l-walker/)
 4. 📅 Follow the [v1.0 Calendar](https://bit.ly/AIEC_Cal) to ensure you have access to [our primary Zoom classroom](https://us02web.zoom.us/j/87543421451) and you when we hold office hours
 5. 🎖️ Decide now: is [The AI Engineer Certification](https://absorbing-toaster-713.notion.site/The-AI-Engineer-Certification-256cd547af3d808a9c95e8f6efb8fb5a?pvs=74) right for you?
@@ -43,30 +43,26 @@ To prepare for Session 1, be sure that you have the following things completed:
 
 [`00_AIEC_Quicklinks`](00_AIEC_Quicklinks/README.md) is your one-stop shop for all course materials, and our [syllabus and detailed schedule](https://absorbing-toaster-713.notion.site/The-AI-Engineer-Certification-v1-0-Curriculum-Detailed-Schedule-33ccd547af3d80798552d6f8a47362aa?pvs=74) will guide us through the course. Including:
 
-- 📰 Session Sheets
-- ⏺️ Recordings
-- 🖼️ Slide Decks
-- ⌨️ Assignment Code
-- 📜 Assignment Submission Forms
+- 📰 Modules: Overviews of each session including core concepts and suggested reading
+- ⌨️ Assignments: The primary work that you need to complete; where building 🏗️, shipping 🚢, and sharing 🚀 happens
+- ⏺️ Recordings: In case you miss anything, or want to slow it dooowwwwwnnnn
+- 🖼️ Slide Decks: Our slides are your slides; please steal them and put them to good use
+- 📜 Assignment Submission Forms: The Google Forms that you will use to submit your homework
+- 🗣️ Feedback Forms: The Google Forms that you will use to let us know how we can improve, every class
 
 ---
 
 ## 🌐 Discord
 
-When it comes to Discord, there is a lot to explore. However, if you're trying to get down to brass tacks for the course, focus on these aspects:
+It's easy to find your way around in our course within the Discord community:
 
-### Community Channels
+### Our Cohort Channels
 
-- [Introductions](https://discord.com/channels/1135695983720792216/1169489404511920139) (public - drop yours!)
-- [build-ship-share-🏗-🚢-🚀](https://discord.com/channels/1135695983720792216/1135700320517890131) (for when you've built and shipped and are ready to share)
-
-### AIEC1 Channels
-
-- [announcements](https://discord.com/channels/1135695983720792216/1470523419668779018) (for instructor and peer support announcements)
-- [general](https://discord.com/channels/1135695983720792216/1470523235526512671) (treat as cohort misc!)
-- [questions](https://discord.com/channels/1135695983720792216/1470523176420118640) (use this channel to get your **questions** answered!)
-- [lounge](https://discord.com/channels/1135695983720792216/1470523597536886938) (You can hang out with instructors, peer supporters, and other students!)
-- [office-hours](https://discord.com/channels/1135695983720792216/1470523659666985116) (Join for office hours scheduled on the Cohort calendar)
+- [aiec1-announcements](https://discord.com/channels/1135695983720792216/1470523419668779018)  For all cohort-level announcements regarding The AI Engineer Certification v1.0
+- [aiec1-general](https://discord.com/channels/1135695983720792216/1470523235526512671) The AI Engineer Certification v1.0 cohort general channel - for anything that doesn't fit anywhere else!
+- [aiec1-questions](https://discord.com/channels/1135695983720792216/1470523176420118640) For all Q&A related to anything and everything AI Engineering during the cohort!
+- [aiec1-lounge](https://discord.com/channels/1135695983720792216/1470523597536886938) A voice channel for anytime!0
+- [aiec1-office-hours](https://discord.com/channels/1135695983720792216/1470523659666985116) A voice channel for office hours!
 
 ### Discord Community Rules
 
@@ -80,7 +76,7 @@ When it comes to Discord, there is a lot to explore. However, if you're trying t
   - No spamming (text or voice) or screaming in voice chat
   - Use push-to-talk if you have background noise
   - No explicit NSFW content (porn, gore, etc.) in text, music bots, attachments/links, or profile pictures
-  - If you’re unsure whether something violates the rules, DM anyone with a `⚡AIMS` tag on their Discord profile to verify
+  - If you’re unsure whether something violates the rules, DM anyone with a `⚡AIM` tag on their Discord profile to verify
   - No harassment, bullying, slurs, or aggressive behavior
 
   </div>
@@ -107,5 +103,5 @@ We believe in the power of collaboration. Contributions, ideas, and feedback are
 
 Please reach out to `jacob@aimakerspace.io` with any questions or suggestions.
 
-Happy coding! 🚀🚀🚀
+Keep building, shipping, and sharing, and we'll do the same 🏗️🚢🚀
 
