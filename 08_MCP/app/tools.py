@@ -56,6 +56,43 @@ async def get_product(product_id: int) -> dict:
 
 
 @mcp.tool()
+async def search_products(query: str, category: str | None = None) -> list[dict]:
+    """Search products by keyword in name or description, with optional category filter."""
+    normalized = query.strip()
+    if not normalized:
+        return []
+
+    db = await oauth_provider._get_db()
+    keyword = f"%{normalized.lower()}%"
+    if category:
+        cursor = await db.execute(
+            """
+            SELECT id, name, description, price, category
+            FROM products
+            WHERE category = ?
+              AND (LOWER(name) LIKE ? OR LOWER(description) LIKE ?)
+            ORDER BY price ASC
+            """,
+            (category, keyword, keyword),
+        )
+    else:
+        cursor = await db.execute(
+            """
+            SELECT id, name, description, price, category
+            FROM products
+            WHERE LOWER(name) LIKE ? OR LOWER(description) LIKE ?
+            ORDER BY price ASC
+            """,
+            (keyword, keyword),
+        )
+    rows = await cursor.fetchall()
+    return [
+        {"id": r[0], "name": r[1], "description": r[2], "price": r[3], "category": r[4]}
+        for r in rows
+    ]
+
+
+@mcp.tool()
 async def add_to_cart(product_id: int, quantity: int = 1) -> dict:
     """Add a product to your shopping cart. If already in cart, quantity is increased."""
     username = await _get_username()
