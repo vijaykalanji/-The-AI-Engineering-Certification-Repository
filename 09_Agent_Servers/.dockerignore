@@ -1,0 +1,49 @@
+# Ignore node_modules and other dependency directories
+node_modules
+frontend
+bower_components
+vendor
+
+# Python virtualenv and caches
+.venv
+.python-version
+.langgraph_api
+__pycache__
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore .env files and other environment files
+.env
+.env.*
+*.local
+
+# Ignore git-related files
+.git
+.gitignore
+
+# Ignore Docker-related files and configs
+.dockerignore
+docker-compose.yml
+railway.toml
+
+# Ignore build and cache directories
+dist
+build
+.cache
+
+# Ignore IDE and editor configurations
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+.DS_Store  # macOS-specific
+
+# Ignore test and coverage files
+coverage
+*.coverage
+*.test.js
+*.spec.js
+tests

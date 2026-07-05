@@ -428,7 +428,9 @@ Why does LangSmith deploy your agent as an API backend only, and why do you stil
 
 #### Answer
 
-_(insert your answer here)_
+LangSmith deploys your agent as an **API backend only** because its job is to run the LangGraph agent — handle threads, runs, streaming, tool calls, and tracing — not to serve a user-facing website. The deployment exposes standard HTTP endpoints (threads, runs, assistants) that any client can call. It is optimized for agent execution, observability, and scaling the backend logic, not for hosting HTML, CSS, JavaScript, or a chat UI.
+
+You still need a **separate frontend deployment like Vercel** because users interact through a browser app (the Next.js chat UI). That frontend renders the interface, streams responses to the user, and proxies requests to the LangSmith agent API through a secure server-side route so API keys are never exposed in the browser. LangSmith hosts the **brain** (agent API); Vercel hosts the **face** (website). Splitting them keeps concerns separated: the agent backend can scale and be monitored independently, while the frontend can be updated, styled, and deployed on its own without redeploying the agent.
 
 ### Question #2
 
@@ -436,7 +438,9 @@ Why should the LangSmith API key live in a Next.js API route (server-side) inste
 
 #### Answer
 
-_(insert your answer here)_
+The LangSmith API key must stay **server-side** because anything sent to the browser is visible to users. If the key were in client-side JavaScript, anyone could open DevTools, view the page source, or inspect network requests and steal it. They could then call your LangSmith deployment directly, run up your usage/costs, or abuse your agent API.
+
+The Next.js `/api` route acts as a **secure proxy**: the browser only talks to your own frontend (`/api/*`), and the server injects the LangSmith API key when forwarding requests to the agent deployment. The key never leaves your server or appears in the client bundle. This follows the standard pattern of keeping secrets in environment variables on the host (Vercel), not in `NEXT_PUBLIC_*` variables that get bundled into the browser.
 
 ## Activity 1: Build a Helpfulness Loop in Production
 
