@@ -1,0 +1,20 @@
+# Repo-root dockerignore for Railway agent build (09_Agent_Servers/Dockerfile.railway)
+.git
+**/.venv
+**/node_modules
+**/.next
+**/.env
+**/.env.*
+**/__pycache__
+**/.langgraph_api
+09_Agent_Servers/frontend
+01_Dense_Vector_Retrieval
+02_*
+03_*
+04_*
+05_*
+06_*
+07_*
+08_*
+10_*
+00_*

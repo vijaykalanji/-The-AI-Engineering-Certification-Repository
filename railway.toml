@@ -1,0 +1,10 @@
+# Monorepo deploy: build agent from repo root (no Root Directory setting needed).
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "09_Agent_Servers/Dockerfile.railway"
+
+[deploy]
+healthcheckPath = "/ok"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+numReplicas = 1
