@@ -446,6 +446,65 @@ The Next.js `/api` route acts as a **secure proxy**: the browser only talks to y
 
 Build an `agent_with_helpfulness` graph that adds a post-response helpfulness check: after the agent answers, a judge model decides whether the response is helpful, and if not, the graph loops back for another attempt (with a safe loop limit). Register it in `langgraph.json`, deploy it, then compare LangSmith traces for queries that pass vs. fail the helpfulness check. Does the retry loop behave differently in Studio vs. production?
 
+#### Answer
+
+**Implementation:** Added `app/graphs/agent_with_helpfulness.py` and registered it in `langgraph.json` as graph `agent_with_helpfulness` with assistant `agent_with_helpfulness`.
+
+Graph flow:
+
+```text
+START → agent → (tool calls?) → action → agent
+              → (no tool calls) → helpfulness → (Y?) → END
+                                              → (N?) → agent  [retry]
+                                              → (>10 msgs?) → END  [loop guard]
+```
+
+- **`agent`** — cat-health model with tools (RAG, Tavily, Arxiv), same system prompt as `simple_agent`.
+- **`action`** — `ToolNode` executes tool calls, then returns to `agent`.
+- **`helpfulness`** — judge model reads the initial user query and latest AI response; returns `HELPFULNESS:Y` or `HELPFULNESS:N`.
+- **Loop guard** — if message count exceeds 10, emits `HELPFULNESS:END` and exits (prevents runaway cost).
+
+**How to run locally (LangGraph Studio):**
+
+```bash
+cd 09_Agent_Servers
+uv run langgraph dev
+```
+
+In Studio, select assistant **`agent_with_helpfulness`**, then test:
+
+| Query | Expected behavior |
+|-------|-------------------|
+| *"How often should I deworm my cat?"* | Agent uses RAG → helpfulness judge likely passes on first try (`HELPFULNESS:Y`) |
+| *"cat"* (vague) | Weak first answer → judge returns `N` → agent retries with a more complete response |
+
+**Deploy to production:**
+
+```bash
+uv run langgraph deploy --name cat-health-agent-vijay
+```
+
+Both `simple_agent` and `agent_with_helpfulness` are included in the same deployment.
+
+**Trace comparison (pass vs. fail):**
+
+| Trace type | What you see in LangSmith |
+|------------|---------------------------|
+| **Pass (helpful on first try)** | `agent` → optional `action` (tools) → `agent` → `helpfulness` → END. Fewer nodes, lower latency, one model answer visible to the user. |
+| **Fail (retry loop)** | Extra cycles: `helpfulness` → `agent` → … → `helpfulness` again. Trace shows multiple `agent` + `helpfulness` pairs. Each retry adds LLM cost. The final user-visible answer is the last `agent` message before `HELPFULNESS:Y`. |
+
+**Studio vs. production:**
+
+| | LangGraph Studio (local) | LangSmith production |
+|---|--------------------------|----------------------|
+| **Graph logic** | Same compiled graph | Same compiled graph |
+| **Visibility** | Step-by-step in Studio UI; easy to inspect `HELPFULNESS:Y/N` markers inline | Full traces in LangSmith Deployments → Runs; harder to see live but better for comparing runs over time |
+| **Latency** | Lower (local server) | Higher (network + cloud cold start) |
+| **Retry behavior** | Identical routing — retries fire when judge returns `N` | Identical routing; retries show as extra span groups in the trace |
+| **Loop guard** | Triggers at >10 messages in state | Same guard; important in production where vague queries could otherwise loop |
+
+**Key takeaway:** The helpfulness loop adds a **quality gate** at the cost of extra judge-model calls and possible retries. In production, traces for failed-then-recovered queries are visibly longer than one-shot passes — useful for spotting when the agent needs better prompts, tools, or judge calibration. For the Vercel frontend, switch `ASSISTANT_ID` to `"agent_with_helpfulness"` in `frontend/app/page.tsx` to demo this graph in the live chat UI.
+
 ## Advanced Activity: Auth and Custom Routes
 
 Research [LangSmith Deployments custom routes](https://github.com/langchain-samples/lsd-custom-route-react-ui) and describe how you could add authentication so each user only sees their own threads. Optionally implement a simple auth gate on your Vercel frontend.
