@@ -83,7 +83,9 @@ What is the difference between serverless and dedicated endpoints?
 
 #### ✅ Answer:
 
-_(insert your answer here)_
+Serverless endpoints are shared, provider-managed inference capacity that you can call instantly without provisioning infrastructure. You pay per usage, startup is fast, and operational overhead is low, but latency and throughput can be less predictable during peak demand because compute is multi-tenant.
+
+Dedicated endpoints reserve compute for your deployment (single-tenant or isolated capacity), so you get more predictable latency/throughput and stronger control over scaling behavior. The trade-off is higher cost (often billed by uptime/allocated hardware), more configuration responsibility, and the need to actively manage scale-down/shutdown to avoid unnecessary spend.
 
 ### ❓ Question #2:
 
@@ -91,7 +93,51 @@ Why is it important to consider token throughput and latency when choosing an LL
 
 #### ✅ Answer:
 
-_(insert your answer here)_
+In user-facing applications, latency directly affects UX: users perceive slow first-token time and slow full-response time as poor product quality. Even if answer quality is high, long waits reduce engagement and trust.
+
+Token throughput determines how quickly the model can generate and complete responses under real traffic. Higher throughput usually means better responsiveness, better concurrency handling, and fewer queue backlogs. Together, latency and throughput also determine cost-performance trade-offs: a model that is slightly better in quality but much slower or more expensive can be worse for production outcomes (retention, SLA compliance, and infrastructure cost).
+
+## Fireworks Request/Response Sample (for Loom)
+
+This assignment used Fireworks' OpenAI-compatible chat completions endpoint with the serverless model `accounts/fireworks/models/gpt-oss-20b`.
+
+Sample request shape:
+
+```json
+POST https://api.fireworks.ai/inference/v1/chat/completions
+{
+  "model": "accounts/fireworks/models/gpt-oss-20b",
+  "messages": [
+    { "role": "user", "content": "Reply exactly ACCESS_OK" }
+  ],
+  "max_tokens": 16
+}
+```
+
+Observed response shape:
+
+```json
+{
+  "id": "chatcmpl-...",
+  "object": "chat.completion",
+  "model": "accounts/fireworks/models/gpt-oss-20b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "reasoning_content": "..."
+      },
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 76,
+    "completion_tokens": 16,
+    "total_tokens": 92
+  }
+}
+```
 
 ## Activity 1: RAGAS Evaluation with Cost Analysis
 
