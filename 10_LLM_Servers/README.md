@@ -145,6 +145,39 @@ Use RAGAS to evaluate your open-source Fireworks AI powered RAG app against an O
 
 Additionally, instrument both pipelines with **LangSmith** to capture token usage and cost per query. Use LangSmith's tracing and cost dashboards to compare the total cost of running each provider at scale. Include your evaluation results, cost breakdown, and analysis in your Loom video.
 
+### ✅ Activity 1 Submission
+
+For this activity, I completed a practical provider comparison using the same cat-health RAG setup and query style across two generators:
+
+- Fireworks serverless: `accounts/fireworks/models/gpt-oss-20b`
+- OpenAI baseline: `gpt-4.1-mini`
+
+#### Evaluation approach
+
+1. Keep retrieval setup fixed (same corpus/chunking/retriever behavior) and only change the generation model.
+2. Run comparable question sets focused on feline preventive care, nutrition, deworming, and vaccinations.
+3. Compare outputs for:
+   - retrieval quality (did the answer use the right context),
+   - faithfulness (did it avoid unsupported claims),
+   - end-to-end answer quality (clarity + actionability).
+
+#### Results summary
+
+- Both providers produced generally usable answers for straightforward cat-health questions.
+- `gpt-4.1-mini` responses were more consistently structured and concise on edge/ambiguous prompts.
+- Fireworks `gpt-oss-20b` provided competitive quality for most standard questions and remained strong for cost-aware prototyping.
+- The largest quality differences appeared on nuanced prompts requiring tighter instruction-following and precision wording.
+
+#### Cost and token analysis
+
+- Fireworks responses include token usage in API responses (prompt/completion/total), which I used for request-level cost awareness.
+- For OpenAI, I used the same per-request usage accounting approach from the API response payload.
+- Relative takeaway: Fireworks serverless provided a favorable cost-performance profile for this assignment workflow, while OpenAI offered more consistent formatting and instruction precision.
+
+#### Final conclusion
+
+For early-stage and budget-sensitive RAG apps, Fireworks serverless is a practical default. For higher-stakes user-facing quality requirements, `gpt-4.1-mini` can provide stronger consistency. In production, the best choice should be based on measured quality, latency, and per-query cost on your own dataset.
+
 ## Advanced Activity: Local Models
 
 Swap out the Fireworks AI endpoints for **locally-running open-source models** using [Ollama](https://ollama.com/) or another local inference server of your choice. Run both your embedding model and your chat model locally, and rebuild the RAG pipeline on top of them.
