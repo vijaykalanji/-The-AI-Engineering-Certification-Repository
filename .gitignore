@@ -7,8 +7,3 @@ __pycache__/
 .venv
 uv.lock
 workspace
-
-# Cursor IDE local config (keep on your machine, not in homework repo)
-.cursor/
-.agents/
-.vscode/

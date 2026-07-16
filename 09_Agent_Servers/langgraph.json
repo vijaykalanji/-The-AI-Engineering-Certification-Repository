@@ -4,19 +4,13 @@
   "env": ".env",
   "python_version": "3.13",
   "graphs": {
-    "simple_agent": "app.graphs.simple_agent:graph",
-    "agent_with_helpfulness": "app.graphs.agent_with_helpfulness:graph"
+    "simple_agent": "app.graphs.simple_agent:graph"
   },
   "assistants": {
     "agent": {
       "graph_id": "simple_agent",
       "name": "Simple Agent",
       "description": "Agent with tools using conditional tool-calling."
-    },
-    "agent_with_helpfulness": {
-      "graph_id": "agent_with_helpfulness",
-      "name": "Agent with Helpfulness Check",
-      "description": "Cat health agent with post-response helpfulness judge and retry loop."
     }
   }
 }

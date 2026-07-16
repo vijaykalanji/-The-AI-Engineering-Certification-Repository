@@ -428,9 +428,7 @@ Why does LangSmith deploy your agent as an API backend only, and why do you stil
 
 #### Answer
 
-LangSmith deploys your agent as an **API backend only** because its job is to run the LangGraph agent — handle threads, runs, streaming, tool calls, and tracing — not to serve a user-facing website. The deployment exposes standard HTTP endpoints (threads, runs, assistants) that any client can call. It is optimized for agent execution, observability, and scaling the backend logic, not for hosting HTML, CSS, JavaScript, or a chat UI.
-
-You still need a **separate frontend deployment like Vercel** because users interact through a browser app (the Next.js chat UI). That frontend renders the interface, streams responses to the user, and proxies requests to the LangSmith agent API through a secure server-side route so API keys are never exposed in the browser. LangSmith hosts the **brain** (agent API); Vercel hosts the **face** (website). Splitting them keeps concerns separated: the agent backend can scale and be monitored independently, while the frontend can be updated, styled, and deployed on its own without redeploying the agent.
+_(insert your answer here)_
 
 ### Question #2
 
@@ -438,72 +436,11 @@ Why should the LangSmith API key live in a Next.js API route (server-side) inste
 
 #### Answer
 
-The LangSmith API key must stay **server-side** because anything sent to the browser is visible to users. If the key were in client-side JavaScript, anyone could open DevTools, view the page source, or inspect network requests and steal it. They could then call your LangSmith deployment directly, run up your usage/costs, or abuse your agent API.
-
-The Next.js `/api` route acts as a **secure proxy**: the browser only talks to your own frontend (`/api/*`), and the server injects the LangSmith API key when forwarding requests to the agent deployment. The key never leaves your server or appears in the client bundle. This follows the standard pattern of keeping secrets in environment variables on the host (Vercel), not in `NEXT_PUBLIC_*` variables that get bundled into the browser.
+_(insert your answer here)_
 
 ## Activity 1: Build a Helpfulness Loop in Production
 
 Build an `agent_with_helpfulness` graph that adds a post-response helpfulness check: after the agent answers, a judge model decides whether the response is helpful, and if not, the graph loops back for another attempt (with a safe loop limit). Register it in `langgraph.json`, deploy it, then compare LangSmith traces for queries that pass vs. fail the helpfulness check. Does the retry loop behave differently in Studio vs. production?
-
-#### Answer
-
-**Implementation:** Added `app/graphs/agent_with_helpfulness.py` and registered it in `langgraph.json` as graph `agent_with_helpfulness` with assistant `agent_with_helpfulness`.
-
-Graph flow:
-
-```text
-START → agent → (tool calls?) → action → agent
-              → (no tool calls) → helpfulness → (Y?) → END
-                                              → (N?) → agent  [retry]
-                                              → (>10 msgs?) → END  [loop guard]
-```
-
-- **`agent`** — cat-health model with tools (RAG, Tavily, Arxiv), same system prompt as `simple_agent`.
-- **`action`** — `ToolNode` executes tool calls, then returns to `agent`.
-- **`helpfulness`** — judge model reads the initial user query and latest AI response; returns `HELPFULNESS:Y` or `HELPFULNESS:N`.
-- **Loop guard** — if message count exceeds 10, emits `HELPFULNESS:END` and exits (prevents runaway cost).
-
-**How to run locally (LangGraph Studio):**
-
-```bash
-cd 09_Agent_Servers
-uv run langgraph dev
-```
-
-In Studio, select assistant **`agent_with_helpfulness`**, then test:
-
-| Query | Expected behavior |
-|-------|-------------------|
-| *"How often should I deworm my cat?"* | Agent uses RAG → helpfulness judge likely passes on first try (`HELPFULNESS:Y`) |
-| *"cat"* (vague) | Weak first answer → judge returns `N` → agent retries with a more complete response |
-
-**Deploy to production:**
-
-```bash
-uv run langgraph deploy --name cat-health-agent-vijay
-```
-
-Both `simple_agent` and `agent_with_helpfulness` are included in the same deployment.
-
-**Trace comparison (pass vs. fail):**
-
-| Trace type | What you see in LangSmith |
-|------------|---------------------------|
-| **Pass (helpful on first try)** | `agent` → optional `action` (tools) → `agent` → `helpfulness` → END. Fewer nodes, lower latency, one model answer visible to the user. |
-| **Fail (retry loop)** | Extra cycles: `helpfulness` → `agent` → … → `helpfulness` again. Trace shows multiple `agent` + `helpfulness` pairs. Each retry adds LLM cost. The final user-visible answer is the last `agent` message before `HELPFULNESS:Y`. |
-
-**Studio vs. production:**
-
-| | LangGraph Studio (local) | LangSmith production |
-|---|--------------------------|----------------------|
-| **Graph logic** | Same compiled graph | Same compiled graph |
-| **Visibility** | Step-by-step in Studio UI; easy to inspect `HELPFULNESS:Y/N` markers inline | Full traces in LangSmith Deployments → Runs; harder to see live but better for comparing runs over time |
-| **Latency** | Lower (local server) | Higher (network + cloud cold start) |
-| **Retry behavior** | Identical routing — retries fire when judge returns `N` | Identical routing; retries show as extra span groups in the trace |
-| **Loop guard** | Triggers at >10 messages in state | Same guard; important in production where vague queries could otherwise loop |
-
-**Key takeaway:** The helpfulness loop adds a **quality gate** at the cost of extra judge-model calls and possible retries. In production, traces for failed-then-recovered queries are visibly longer than one-shot passes — useful for spotting when the agent needs better prompts, tools, or judge calibration. For the Vercel frontend, switch `ASSISTANT_ID` to `"agent_with_helpfulness"` in `frontend/app/page.tsx` to demo this graph in the live chat UI.
 
 ## Advanced Activity: Auth and Custom Routes
 

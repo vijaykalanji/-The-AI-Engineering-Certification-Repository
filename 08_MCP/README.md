@@ -155,14 +155,7 @@ Why is OAuth important for MCP servers, and what security considerations should 
 
 #### Answer
 
-OAuth is important for MCP servers because MCP tools are executable capabilities, not just static data reads. Without OAuth, any client that can reach the server could trigger sensitive actions (for example modifying carts or checking out) without user identity, consent, or scope boundaries. OAuth gives us authenticated identity, delegated consent, and scoped access so we can enforce least privilege.
-
-When exposing tools to AI clients, key security considerations are:
-- strict scope design (`read` vs `write`) and server-side scope checks on every tool call,
-- short-lived access tokens plus refresh-token revocation and secure token storage,
-- explicit confirmation patterns for destructive actions (for example checkout),
-- strong input validation and output constraints to prevent prompt-induced misuse,
-- audit logging, rate limiting, and safe public exposure (TLS, issuer URL consistency, and minimal attack surface).
+_(insert your answer here)_
 
 ### Question #2
 
@@ -170,22 +163,11 @@ What is Streamable HTTP transport in MCP, and why might you expose a server publ
 
 #### Answer
 
-Streamable HTTP transport is MCP over HTTP where the client and server exchange MCP messages as a continuous, stateful stream rather than one-off local process I/O. It enables remote clients, browser-based auth redirects, and multi-step interactions while preserving MCP semantics.
-
-You might expose a server publicly with OAuth instead of local stdio when you need real authentication, shared access across machines, and production-like integration. Stdio is great for local development and trust boundaries on a single host, but it does not provide internet-reachable endpoints, OAuth redirect flows, or clean multi-user access patterns by itself.
+_(insert your answer here)_
 
 ## Activity 1: Extend the MCP Server
 
 Add at least one new tool to the cat shop MCP server (e.g., `search_products`, `update_cart_quantity`, or `get_order_history`). Ensure the new tool integrates properly with the existing database and OAuth authentication. Demo the new tool through an MCP client and include it in your Loom video.
-
-### Activity 1 Completion
-
-Implemented `search_products(query, category=None)` in `app/tools.py`.
-
-- Searches by keyword across product name and description
-- Supports optional category filter
-- Returns normalized product records sorted by ascending price
-- Uses the existing MCP server/database stack and is exposed as a standard MCP tool
 
 ## Advanced Activity: Build a Custom MCP Client
 

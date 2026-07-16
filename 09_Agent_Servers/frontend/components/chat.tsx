@@ -21,6 +21,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { getMessageText, toolLabel } from "@/lib/messages";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "/api";
+
 type StreamMessage = ReturnType<typeof useStream>["messages"][number];
 
 const SUGGESTIONS = [
@@ -29,14 +31,6 @@ const SUGGESTIONS = [
   "What are signs of feline dehydration?",
 ];
 
-function resolveApiUrl(): string {
-  const configured = process.env.NEXT_PUBLIC_API_URL;
-  if (configured?.startsWith("http")) {
-    return configured.replace(/\/$/, "");
-  }
-  return `${window.location.origin}/api`;
-}
-
 function toolIcon(name?: string) {
   if (name === "retrieve_information") return <FileText className="size-3" />;
   if (name?.startsWith("tavily")) return <Search className="size-3" />;
@@ -44,31 +38,7 @@ function toolIcon(name?: string) {
 }
 
 export function Chat({ assistantId }: { assistantId: string }) {
-  const [apiUrl, setApiUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    setApiUrl(resolveApiUrl());
-  }, []);
-
-  if (!apiUrl) {
-    return (
-      <div className="flex min-h-0 flex-1 items-center justify-center">
-        <Loader2 className="size-6 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
-
-  return <ChatSession assistantId={assistantId} apiUrl={apiUrl} />;
-}
-
-function ChatSession({
-  assistantId,
-  apiUrl,
-}: {
-  assistantId: string;
-  apiUrl: string;
-}) {
-  const stream = useStream({ apiUrl, assistantId });
+  const stream = useStream({ apiUrl: API_URL, assistantId });
   const { messages, isLoading, error } = stream;
 
   const [input, setInput] = useState("");

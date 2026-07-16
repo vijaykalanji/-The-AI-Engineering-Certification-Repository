@@ -11,8 +11,6 @@ from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from app.models import _openai_client_kwargs
-
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
 
 
@@ -41,8 +39,7 @@ def _get_retriever():
 
     embeddings = OpenAIEmbeddings(
         model=os.environ.get("OPENAI_EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL),
-        check_embedding_ctx_length=False,
-        **_openai_client_kwargs(),
+        openai_api_key=os.environ["OPENAI_API_KEY"],
     )
     vectorstore = QdrantVectorStore.from_documents(
         documents=chunks,
