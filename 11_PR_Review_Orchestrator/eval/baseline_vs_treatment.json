@@ -1,0 +1,13 @@
+{
+  "description": "Fill with real or simulated PR latency samples for Task 5/6.",
+  "baseline": {
+    "time_in_review_hours": [4.2, 8.1, 12.0, 20.5, 28.0, 31.0, 36.0, 48.0],
+    "waiting_over_48h_rate": 0.18,
+    "revert_hotfix_rate": 0.031
+  },
+  "treatment": {
+    "time_in_review_hours": [2.5, 4.0, 6.5, 10.0, 14.0, 18.0, 20.0, 24.0],
+    "waiting_over_48h_rate": 0.12,
+    "revert_hotfix_rate": 0.03
+  }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PR Review Orchestrator</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 2rem; background: #0f172a; color: #e2e8f0; }
+    h1, h2 { color: #f8fafc; }
+    .card { background: #1e293b; border-radius: 12px; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .muted { color: #94a3b8; }
+    .pending { color: #fbbf24; }
+    .ok { color: #4ade80; }
+    code { background: #334155; padding: 0.1rem 0.35rem; border-radius: 4px; }
+    a { color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <h1>Cross-Team PR Review Orchestrator</h1>
+  <p class="muted">MVP dashboard — GitHub events → SLA nudges → Slack-style notifications</p>
+
+  <div class="card">
+    <h2>How to demo</h2>
+    <ol>
+      <li><code>POST /demo/simulate-pr</code> to open a cross-team PR</li>
+      <li>Wait for T1/T2 SLA actions (or call them via orchestrator once implemented)</li>
+      <li><code>POST /demo/simulate-review?team=payments-team</code> then profile-team</li>
+      <li>Refresh this page</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Open / tracked PRs ({{ prs|length }})</h2>
+    {% if not prs %}
+      <p class="muted">No PRs yet. Hit the simulate endpoint.</p>
+    {% endif %}
+    {% for pr in prs %}
+      <div class="card">
+        <strong>{{ pr.repo }}#{{ pr.pr_number }}</strong> — {{ pr.title }}
+        <div class="muted">Author: {{ pr.author }} · Status: {{ pr.status }}</div>
+        <div>
+          Pending:
+          {% if pr.pending_teams %}
+            <span class="pending">{{ pr.pending_teams|join(", ") }}</span>
+          {% else %}
+            <span class="ok">none</span>
+          {% endif %}
+        </div>
+        <pre style="white-space: pre-wrap;">{{ pr.summary }}</pre>
+        <div class="muted">Notifications:</div>
+        <ul>
+          {% for n in pr.notifications %}
+            <li>{{ n }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
